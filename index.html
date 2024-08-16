@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mw2</title>
+	<meta content="text/html" charset="utf-8">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<style type="text/css">
+	body {
+		background: url('bg.png') no-repeat;
+		background-size: auto;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-moz-user-drag: none;
+		user-select: none;
+		user-drag: none;
+		min-width: 1050px;
+		min-height: 600px;
+	}
+	.smokeScreen {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		opacity: 0.67;
+	}
+	.gradient {
+		background: -moz-linear-gradient(0deg,  rgba(248,181,0,1) 0%, rgba(252,233,185,0) 99%, rgba(252,234,187,0) 100%);
+		background: -webkit-linear-gradient(0deg,  rgba(248,181,0,1) 0%,rgba(252,233,185,0) 99%,rgba(252,234,187,0) 100%);
+		background: linear-gradient(0deg, rgba(38, 128, 154, 0.24) 0%,rgba(252,233,185,0) 99%,rgba(252,234,187,0) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8b500', endColorstr='#00fceabb',GradientType=1 );
+		width: 1800px;
+		height: 900px;
+		position: fixed;
+		bottom: -500px;
+		left: -390px;
+		transform: rotate(10deg);
+		animation-name: modernWarfare2;
+		animation-duration: 7s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+	@keyframes modernWarfare2 {
+		0%   {bottom: -800px;}
+		25%  {bottom: -700px;}
+		50%  {bottom: -660px;}
+		75%  {bottom: -700px;}
+		95%  {bottom: -780px;}
+		97%  {bottom: -790px;}
+		100% {bottom: -800px;}
+	}
+	.menuBox {
+		background: -moz-linear-gradient(0deg,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.07) 100%);
+		background: -webkit-linear-gradient(0deg,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.07) 100%);
+		background: linear-gradient(0deg, rgba(255,255,255,0) 0%,rgba(255, 255, 255, 0.03) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#42ffffff',GradientType=1 );
+		width: 450px;
+		height: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		backdrop-filter: blur;
+	}
+	.seperator {
+		background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.27) 100%);
+		background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.27) 100%);
+		background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.27) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#42ffffff',GradientType=1 );
+		width: 100%;
+		height: 2px;
+	}
+	@font-face {
+		font-family: 'Testfont';
+		src: url(bnkgth.ttf);
+	}
+	@font-face {
+		font-family: 'Testfont2';
+		src: url(DINProL.otf);
+	}
+	@font-face {
+		font-family: 'Testfont3';
+		src: url(DINPro.otf);
+	}
+	.screenTitle {
+		font-family: 'Testfont', sans-serif;
+		color: #fff;
+		font-size: 40px;
+		width: calc(100% - 10px);
+		padding-top: 20px;
+		height: 70px;
+		line-height: 100px;
+		text-align: right;
+		/*box-shadow: 0px 0px 1px 1px black;*/
+		text-shadow: 0px 0px 1px white;
+		letter-spacing: -2px;		
+	}
+	.button {
+		font-family: 'Testfont2', sans-serif;
+		text-transform: uppercase;
+		color: #eee;
+		font-size: 19px;
+		text-align: right;
+		width: 550px;
+		height: 30px;
+		line-height: 30px;
+		position: relative;
+		cursor: pointer;
+		overflow: hidden;
+	}
+	.button:hover {
+		animation-name: blinker;
+		animation-duration: 0.7s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+	@keyframes blinker {
+		0%   {color: rgba(255,255,255,0.3);}
+		50%  {color: rgba(255,255,255,1);}
+		100% {color: rgba(255,255,255,0.3);}
+	}
+	.textnotbtn {
+		font-family: 'Testfont3', sans-serif;
+		color: #aaa;
+		font-size: 16px;
+		text-align: right;
+		width: 390px;
+		line-height: 20px;
+		position: relative;
+		cursor: default;
+		padding-top: 8px;
+		padding-left: 50px;
+	}
+	.button:hover .blackside {
+		top: 0px;
+	}
+	.blackside1 {
+		position: absolute;
+		top: 30px;
+		left: 0px;
+		width: 98px;
+		height: 100%;
+		background: black;
+		z-index: 0;
+	}
+	.blackside2 {
+		position: absolute;
+		top: 30px;
+		left: 103px;
+		width: 360px;
+		height: 100%;
+		background: black;
+		z-index: 0;
+	}
+	.blackside3 {
+		width: 0;
+		height: 0;
+		border-top: 30px solid black; 
+		border-right: 15px solid transparent;
+		right: 72px;
+		top: 30px;	
+		position: absolute;	
+		z-index: 0;
+	}
+	.blackside4 {
+		width: 10px;
+		height: 30px;
+		-webkit-transform: skew(-28deg);
+		   -moz-transform: skew(-28deg);
+		     -o-transform: skew(-28deg);
+		background: black;
+		right: 60px;
+		top: 30px;	
+		position: absolute;	
+		z-index: 0;
+	}
+	.unlocked {
+		background: url(unlocked.png) no-repeat;
+		background-size: 100% 100%;
+		width: 46px;
+		height: 20px;
+		position: absolute;
+		top: 35px;
+		right: 0px;
+	}
+	.buttonText {
+		position: absolute;
+		z-index: 1;
+		right: 110px;
+	}
+	.buttonMenuMainscreen {
+		margin-top: 35%;
+	}
+	.smokeScreenOverlay {
+		width: 100%;
+		height: 100%;
+		background: -moz-linear-gradient(left,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+background: -webkit-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%);
+background: linear-gradient(to right,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	}
+	.version {
+		position: absolute;
+		bottom: 40px;
+		right: 60px;
+		font-family: 'Tahoma', sans-serif;
+		font-size: 11px;
+		color: #aaa;
+		letter-spacing: 0.5px;
+	}
+	.onscreenTitle {
+		position: absolute;
+		bottom: 30%;
+		right: 20%;
+		font-family: 'Testfont', sans-serif;
+		font-size: 40px;
+		letter-spacing: -3px;
+		color: #fff;
+		line-height: 16px;
+	}
+	.smaller {
+		font-size: 21px;
+		letter-spacing: 0px;
+		padding-left: 3px;
+		color: #ccc;
+	}
+	.button.new .unlocked {
+		top: 5px;
+	}
+	@media screen and (min-width: 1279px) and (max-width: 1370px) {
+		body {
+			zoom: 1;
+		}
+	}
+	@media screen and (min-width: 1371px) and (max-width: 1599px) {
+		body {
+			zoom: 1.15;
+		}
+	}
+	@media screen and (min-width: 1600px) and (max-width: 1800px) {
+		body {
+			zoom: 1.22;
+		}
+	}
+	@media screen and (min-width: 1801px) and (max-width: 1920px) {
+		body {
+			zoom: 1.3;
+		}
+	}
+	.screenDefault {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		min-width: 1050px;
+		min-height: 600px;
+	}
+	.mainScreen {
+		/* no params yet */
+	}
+	.dev {
+		display: none;
+	}
+	.addonButtons {
+		position: absolute;
+		bottom: 105px;
+		left: 0px;
+	}
+	.table {
+		display: table;
+	}
+	.cell {
+		display: table-cell;
+	}
+	.veralb {
+		vertical-align: bottom;
+	}
+	.interfaceButton {
+		font-family: 'Testfont2', sans-serif;
+		text-transform: uppercase;
+		color: #eee;
+		font-size: 19px;
+		text-align: right;
+		width: 550px;
+		height: 30px;
+		line-height: 30px;
+		position: relative;
+		cursor: pointer;
+		overflow: hidden;		
+		/*bottom: 100px;*/
+	}
+	.interfaceButton:hover {
+		animation-name: blinker;
+		animation-duration: 0.7s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+	.keyPress {
+		font-family: 'Testfont3', sans-serif;
+		color: yellow;
+		position: absolute;
+		right: -12px;
+		width: 100px;
+		text-align: left;
+	}
+	.interfaceStats {
+		position: absolute;
+		bottom: 70px;
+		background: rgba(55,55,55,0.5);
+		width: 100%;
+		left: 0px;
+		height: 26px;
+		color: #ddd;
+		font-family: 'Testfont3', sans-serif;
+		line-height: 26px;
+		font-size: 15px;
+		box-shadow: inset 0px 0px 12px rgba(0,0,0,0.4);
+	}
+	.lobbyInfo {
+		position: absolute;
+		right: 60px;
+		top: 65px;
+		font-family: 'Testfont3', sans-serif;
+		color: #ccc;
+		font-size: 18px;
+	}
+	.playerlist {
+		width: 400px;
+		position: absolute;
+		top: 100px;
+		right: 60px;
+	}
+	.player {
+		width: 100%;
+		height: 30px;
+		background: rgba(44,44,44,0.6);
+		margin-bottom: 3px;
+		line-height: 30px;
+		color: #fff;
+		position: relative;
+	}
+	.selfplayer {
+		color: orange;
+	}
+	.playername {
+		position: absolute;
+		font-family: 'Testfont2', sans-serif;
+		font-size: 17px;
+		left: 95px;
+	}
+	.clantag {
+		position: absolute;
+		left: 32px;
+		font-family: 'Testfont3', sans-serif;
+		font-size: 17px;
+		color: #fff;
+	}
+	.clantagborder {
+		color: yellow;
+	}
+	.cpbalance {
+		position: absolute;
+		right: 12px;
+		font-family: 'Testfont3', sans-serif;
+		font-size: 17px;
+		color: #ddd;
+	}
+	.dlcerror {
+		position: relative;
+		left: 460px;
+		font-family: 'Testfont3', sans-serif;
+		font-size: 19px;
+		color: #bb1515;
+		width: 450px;
+	}
+	img {
+		margin: 0px;
+		padding: 0px;
+	}
+	.mapdesc {
+		background: #333;
+		padding: 5px 5px;
+		margin-top: -5px;
+		width: 500px;
+		box-sizing: border-box;
+	}
+	</style>
+</head>
+<body>
+
+<!-- <canvas id="myCanvas" class="smokeScreen" width="1280px" height="720px"></canvas>  -->
+<div class="smokeScreenOverlay"></div>
+<div class="version">024labs_1.0.054</div>
+<div class="gradient"></div>
+<div class="screenDefault mainScreen">
+	<div class="lobbyInfo">Lobby size: 18 (always) | Double XP on weekends</div>
+	<div class="menuBox">		
+		<div class="buttonMenuMainscreen">
+			<div class="button" screenVal="A short info about the developer" onclick="alert('lets get FREAAAKKYYYYY')">
+				<div class="buttonText">About</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>	
+				<div class="unlocked"></div>
+			</div>
+			<div class="seperator"></div>
+			<div class="button new playlistbtn" screenVal="Available maps and playlist">
+				<div class="buttonText">Online playlist</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>	
+				<div class="unlocked"></div>
+			</div>
+			<div class="seperator"></div>
+			<a href="https://discord.com/invite/nYS3myC5t8" target="_blank"><div class="button" screenVal="ZeroTwoFour_dev">
+				<div class="buttonText">JOIN DISCORD</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>
+				<div class="unlocked"></div>	
+			</div></a>
+			<div class="button  switchmus" screenVal="Switch playing music">
+				<div class="buttonText">Toggle Music</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>	
+				<div class="unlocked"></div>
+			</div>
+			<!-- <div class="button" screenVal="">
+				<div class="buttonText">button</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>
+				<div class="unlocked"></div>	
+			</div>
+			<div class="button" screenVal="">
+				<div class="buttonText">button</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>
+				<div class="unlocked"></div>	
+			</div> -->
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="seperator"></div>
+			<div class="textnotbtn">Welcome to Modern Warfare® 2 - Remastered</div>		
+		</div>	
+	</div>
+	<!-- <div class="interfaceStats">
+		<marquee scrollamount="3" scrolldelay="15">
+			Welcome to H2M
+			&nbsp;&nbsp;&nbsp;&nbsp; --- &nbsp;&nbsp;&nbsp;&nbsp;
+			A LEGITIMATE copy of Modern Warfare Remastered is REQUIRED for H2M-Mod
+			&nbsp;&nbsp;&nbsp;&nbsp; --- &nbsp;&nbsp;&nbsp;&nbsp;
+			H2M-MOD WILL BE OUT ON AUGUST 16TH
+			&nbsp;&nbsp;&nbsp;&nbsp; --- &nbsp;&nbsp;&nbsp;&nbsp;
+			Be kind and respectful to other members
+			&nbsp;&nbsp;&nbsp;&nbsp; --- &nbsp;&nbsp;&nbsp;&nbsp;
+			Keep arguments and disputes to a minimum, or take it to DMs
+		</marquee>
+	</div> -->
+	<div class="onscreenTitle">MODERN WARFARE 2<br><span class="smaller">Multiplayer Remastered</span></div>
+</div>
+
+<div class="screenDefault exNetScreen dev">
+	<div class="menuBox">
+		<div class="screenTitle">FoD playlist</div>
+
+		<div class="seperator"></div>
+		<br>
+		<div class="buttons">
+			<div class="button" mscreenVal="Favela is a medium-sized multiplayer map. The objective of Capture the Flag is to capture the opposing team's flag and bring it back to the player's team's flag. Points will only be added if an enemy has not got hold of the team's flag." img="http://vignette2.wikia.nocookie.net/callofduty/images/4/4b/Favela_Map_CoDG.jpg">
+				<div class="buttonText">24/7 MW2 MAPS (2XP)</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>	
+				<div class="unlocked"></div>
+			</div>
+			<div class="button" mscreenVal="Terminal is a medium sized multiplayer map in Call of Duty: Modern Warfare 2, based on the campaign mission No Russian. Sabotage is a bomb-based game type, that is somewhat similar to Search and Destroy. Rules: the bomb has 2 minute timer, when defused - time does not reset." img="http://vignette1.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg">
+				<div class="buttonText">24/7 SNIPERS ONLY (COMING SOON)</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>	
+				<div class="unlocked"></div>
+			</div>
+			<!-- <div class="seperator"></div>
+			<a href="http://steamcommunity.com/id/Z3roTwoFour/" target="_blank">
+				<div class="button" screenVal="ZeroTwoFour_dev">
+					<div class="buttonText">ADD HOST PLAYER</div>	
+					<div class="blackside1 blackside"></div>
+					<div class="blackside2 blackside"></div>	
+					<div class="blackside3 blackside"></div>	
+					<div class="blackside4 blackside"></div>
+					<div class="unlocked"></div>	
+				</div>
+			</a> -->
+			<!-- <br>
+			<br>
+			<br> -->
+			<div class="seperator"></div>
+			<div class="textnotbtn">Freak of Duty matchmaking network</div>	
+		</div>	
+		<div class="addonButtons">		
+			<div class="dlcerror">Favela map is removed from <br>rotation by Infinity Ward</div>	
+			<br>
+			<br>
+			<br>
+			
+			<div class="interfaceButton">
+				<div class="buttonText">Back</div>	
+				<div class="keyPress">ESC</div>
+			</div>
+		</div>
+	</div>	
+	<!-- <div class="interfaceStats">
+		<marquee scrollamount="3" scrolldelay="15">Welcome to iw.ZeroTwoFour.com</marquee>
+	</div> -->
+	<div class="lobbyInfo">
+		<img class="mapimg" src="https://vignette3.wikia.nocookie.net/callofduty/images/2/20/Derail.jpg/revision/latest?cb=20100720174408" width="500px">
+		<div class="mapdesc">sdfdsfsdfs</div>
+	</div>
+	
+</div>
+
+<audio class="mus" src="mw2.mp3" loop="loop" autoplay="1" controls="controls" volume="0.4"></audio>
+
+<script type="text/javascript">
+var playing = true;
+
+$('.button').mouseover(function() {
+	textVal = $(this).attr('screenVal');
+	$(this).parent().find('.textnotbtn').text(textVal);
+	$(this).parent().parent().find('.textnotbtn').text(textVal);
+
+	imgMap = $(this).attr('img');
+	mtextVal = $(this).attr('mscreenVal');
+	$('.mapdesc').text(mtextVal);
+	$('.mapimg').attr('src', imgMap);
+});
+
+$('.interfaceButton').click(function() {
+	$('.exNetScreen').addClass('dev');
+	$('.mainScreen').removeClass('dev');
+})
+
+$('.playlistbtn').click(function() {
+	$('.exNetScreen').removeClass('dev');
+	$('.mainScreen').addClass('dev');
+})
+
+$('.mus').animate({'volume': 0.2})
+
+$('.switchmus').click(function() {
+	if(playing) {
+		$('.mus').trigger('pause');$(".mus").prop("currentTime",0);
+		playing = false;
+	}
+	else {
+		$('.mus').trigger('play');
+		playing = true;
+	}
+})
+
+// Create an array to store our particles
+var particles = [];
+
+// The amount of particles to render
+var particleCount = 250;
+
+// The maximum velocity in each direction
+var maxVelocity = 1;
+
+// The target frames per second (how often do we want to update / redraw the scene)
+var targetFPS = 20;
+
+// Set the dimensions of the canvas as variables so they can be used.
+var canvasWidth = 1280;
+var canvasHeight = 720;
+
+// Create an image object (only need one instance)
+var imageObj = new Image();
+
+// Once the image has been downloaded then set the image on all of the particles
+imageObj.onload = function() {
+    particles.forEach(function(particle) {
+            particle.setImage(imageObj);
+    });
+};
+
+// Once the callback is arranged then set the source of the image
+imageObj.src = "Smoke10.png";
+
+// A function to create a particle object.
+function Particle(context) {
+
+    // Set the initial x and y positions
+    this.x = 0;
+    this.y = 0;
+
+    // Set the initial velocity
+    this.xVelocity = 0;
+    this.yVelocity = 0;
+
+    // Set the radius
+    this.radius = 7;
+
+    // Store the context which will be used to draw the particle
+    this.context = context;
+
+    // The function to draw the particle on the canvas.
+    this.draw = function() {
+        
+        // If an image is set draw it
+        if(this.image){
+            this.context.drawImage(this.image, this.x-128, this.y-128);         
+            // If the image is being rendered do not draw the circle so break out of the draw function                
+            return;
+        }
+        // Draw the circle as before, with the addition of using the position and the radius from this object.
+        this.context.beginPath();
+        this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        this.context.fillStyle = "rgba(0, 0, 0, 1)";
+        this.context.fill();
+        this.context.closePath();
+    };
+
+    // Update the particle.
+    this.update = function() {
+        // Update the position of the particle with the addition of the velocity.
+        this.x += this.xVelocity;
+        this.y += this.yVelocity;
+
+        // Check if has crossed the right edge
+        if (this.x >= canvasWidth) {
+            this.xVelocity = -this.xVelocity;
+            this.x = canvasWidth;
+        }
+        // Check if has crossed the left edge
+        else if (this.x <= 0) {
+            this.xVelocity = -this.xVelocity;
+            this.x = 0;
+        }
+
+        // Check if has crossed the bottom edge
+        if (this.y >= canvasHeight) {
+            this.yVelocity = -this.yVelocity;
+            this.y = canvasHeight;
+        }
+        
+        // Check if has crossed the top edge
+        else if (this.y <= 0) {
+            this.yVelocity = -this.yVelocity;
+            this.y = 0;
+        }
+    };
+
+    // A function to set the position of the particle.
+    this.setPosition = function(x, y) {
+        this.x = x;
+        this.y = y;
+    };
+
+    // Function to set the velocity.
+    this.setVelocity = function(x, y) {
+        this.xVelocity = x;
+        this.yVelocity = y;
+    };
+    
+    this.setImage = function(image){
+        this.image = image;
+    }
+}
+
+// A function to generate a random number between 2 values
+function generateRandom(min, max){
+    return Math.random() * (max - min) + min;
+}
+
+// The canvas context if it is defined.
+var context;
+
+// Initialise the scene and set the context if possible
+function init() {
+    var canvas = document.getElementById('myCanvas');
+    if (canvas.getContext) {
+
+        // Set the context variable so it can be re-used
+        context = canvas.getContext('2d');
+
+        // Create the particles and set their initial positions and velocities
+        for(var i=0; i < particleCount; ++i){
+            var particle = new Particle(context);
+            
+            // Set the position to be inside the canvas bounds
+            particle.setPosition(generateRandom(0, canvasWidth), generateRandom(0, canvasHeight));
+            
+            // Set the initial velocity to be either random and either negative or positive
+            particle.setVelocity(generateRandom(-maxVelocity, maxVelocity), generateRandom(-maxVelocity, maxVelocity));
+            particles.push(particle);            
+        }
+    }
+    else {
+        alert("Please use a modern browser");
+    }
+}
+
+// The function to draw the scene
+function draw() {
+    // Clear the drawing surface and fill it with a black background
+    context.fillStyle = "rgba(70, 70, 70, 0.1)";
+    context.fillRect(0, 0, 1280, 720);
+
+    // Go through all of the particles and draw them.
+    particles.forEach(function(particle) {
+        particle.draw();
+    });
+}
+
+// Update the scene
+function update() {
+    particles.forEach(function(particle) {
+        particle.update();
+    });
+}
+
+// Initialize the scene
+init();
+
+// If the context is set then we can draw the scene (if not then the browser does not support canvas)
+if (context) {
+    setInterval(function() {
+        // Update the scene befoe drawing
+        update();
+
+        // Draw the scene
+        draw();
+    }, 1000 / targetFPS);
+}
+
+
+
+</script>
+</body>
+</html>
