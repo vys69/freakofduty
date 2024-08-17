@@ -559,10 +559,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 		<div class="screenTitle">Freaklist</div>
 
 		<div class="seperator"></div>
-		<br>
+		<div class="textnotbtn">West Coast</div>
 		<div class="buttons">
 			<div class="button" onclick="(copyTDM())" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination and TDM! Get freaky on Rust, Highrise, Boneyard, Terminal, Complex, Crash, Favela, Afghan and Shipment" img="https://static.wikia.nocookie.net/callofduty/images/8/83/Afghan_loading_screen_MW2.png/revision/latest?cb=20130310131229">
-				<div class="buttonText">[FoD] TDM & DOM 24/7</div>	
+				<div class="buttonText"><span style="color: #12759d;">[NA-W]</span> TDM & DOM 24/7</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
 				<div class="blackside3 blackside"></div>	
@@ -570,7 +570,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 				<div class="unlocked"></div>
 			</div>
 			<div class="button" onclick="(copyRustinal())" mscreenVal="24/7 freakathon on Rust & Terminal 👅👅👅 TDM & DOM" img="http://vignette1.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg">
-				<div class="buttonText">[FoD] RUSTINAL 24/7</div>	
+				<div class="buttonText"><span style="color: #12759d;">[NA-W]</span> RUSTINAL 24/7</div>	
+				<div class="blackside1 blackside"></div>
+				<div class="blackside2 blackside"></div>	
+				<div class="blackside3 blackside"></div>	
+				<div class="blackside4 blackside"></div>	
+				<div class="unlocked"></div>
+			</div>
+			<div class="textnotbtn">East Coast</div>
+			<div class="button" onclick="(copyEastCoast())" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination and TDM! Get freaky on Rust, Highrise, Boneyard, Terminal, Complex, Crash, Favela, Afghan and Shipment" img="https://static.wikia.nocookie.net/callofduty/images/8/83/Afghan_loading_screen_MW2.png/revision/latest?cb=20130310131229">
+				<div class="buttonText"><span style="color: #12759d;">[NA-E]</span> Best Maps 24/7</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
 				<div class="blackside3 blackside"></div>	
@@ -667,11 +676,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 	
 	const tdm = 'connect 23.26.130.20:27016';
 	const rustinal = 'connect 23.26.130.20:27017';
+	const eastCoast = 'connect 2.56.254.24:27016';
 	
 	function copyRustinal() {
 		navigator.clipboard.writeText(rustinal)
 			.then(() => {
 				alert('Connect command + Rustinal IP copied to clipboard');
+			})
+			.catch(err => {
+				console.error('Failed to copy: ', err);
+				alert('Failed to copy to clipboard. Please try again.');
+			});
+	}
+	
+	function copyEastCoast() {
+		navigator.clipboard.writeText(eastCoast)
+			.then(() => {
+				alert('Connect command + East Coast IP copied to clipboard');
 			})
 			.catch(err => {
 				console.error('Failed to copy: ', err);
