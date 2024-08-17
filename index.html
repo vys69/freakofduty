@@ -408,6 +408,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 		width: 500px;
 		box-sizing: border-box;
 	}
+
+	audio.mus {
+		opacity: 0.05;
+	}
 	</style>
 </head>
 <body>
@@ -503,16 +507,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 		<div class="seperator"></div>
 		<br>
 		<div class="buttons">
-			<div class="button" mscreenVal="Favela is a medium-sized multiplayer map. The objective of Capture the Flag is to capture the opposing team's flag and bring it back to the player's team's flag. Points will only be added if an enemy has not got hold of the team's flag." img="http://vignette2.wikia.nocookie.net/callofduty/images/4/4b/Favela_Map_CoDG.jpg">
-				<div class="buttonText">24/7 MW2 MAPS (2XP)</div>	
+			<div class="button" onclick="(copyTDM())" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination and TDM! Get freaky on Rust, Highrise, Boneyard, Terminal, Complex, Crash, Favela, Afghan and Shipment" img="http://vignette2.wikia.nocookie.net/callofduty/images/4/4b/Favela_Map_CoDG.jpg">
+				<div class="buttonText">[FoD] TDM & DOM 24/7</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
 				<div class="blackside3 blackside"></div>	
 				<div class="blackside4 blackside"></div>	
 				<div class="unlocked"></div>
 			</div>
-			<div class="button" mscreenVal="Terminal is a medium sized multiplayer map in Call of Duty: Modern Warfare 2, based on the campaign mission No Russian. Sabotage is a bomb-based game type, that is somewhat similar to Search and Destroy. Rules: the bomb has 2 minute timer, when defused - time does not reset." img="http://vignette1.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg">
-				<div class="buttonText">24/7 SNIPERS ONLY (COMING SOON)</div>	
+			<div class="button" onclick="(copyRustinal())" mscreenVal="24/7 freakathon on Rust & Terminal 👅👅👅 TDM, FFA & DOM" img="http://vignette1.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg">
+				<div class="buttonText">[FoD] RUSTINAL 24/7</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
 				<div class="blackside3 blackside"></div>	
@@ -537,7 +541,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 			<div class="textnotbtn">Freak of Duty matchmaking network</div>	
 		</div>	
 		<div class="addonButtons">		
-			<div class="dlcerror">Favela map is removed from <br>rotation by Infinity Ward</div>	
+			<!-- <div class="dlcerror">Favela map is removed from <br>rotation by Infinity Ward</div>	 -->
 			<br>
 			<br>
 			<br>
@@ -561,220 +565,77 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 <audio class="mus" src="mw2.mp3" loop="loop" autoplay="1" controls="controls" volume="0.4"></audio>
 
 <script type="text/javascript">
-var playing = true;
-
-$('.button').mouseover(function() {
-	textVal = $(this).attr('screenVal');
-	$(this).parent().find('.textnotbtn').text(textVal);
-	$(this).parent().parent().find('.textnotbtn').text(textVal);
-
-	imgMap = $(this).attr('img');
-	mtextVal = $(this).attr('mscreenVal');
-	$('.mapdesc').text(mtextVal);
-	$('.mapimg').attr('src', imgMap);
-});
-
-$('.interfaceButton').click(function() {
-	$('.exNetScreen').addClass('dev');
-	$('.mainScreen').removeClass('dev');
-})
-
-$('.playlistbtn').click(function() {
-	$('.exNetScreen').removeClass('dev');
-	$('.mainScreen').addClass('dev');
-})
-
-$('.mus').animate({'volume': 0.2})
-
-$('.switchmus').click(function() {
-	if(playing) {
-		$('.mus').trigger('pause');$(".mus").prop("currentTime",0);
-		playing = false;
+	var playing = true;
+	
+	$('.button').mouseover(function() {
+		textVal = $(this).attr('screenVal');
+		$(this).parent().find('.textnotbtn').text(textVal);
+		$(this).parent().parent().find('.textnotbtn').text(textVal);
+	
+		imgMap = $(this).attr('img');
+		mtextVal = $(this).attr('mscreenVal');
+		$('.mapdesc').text(mtextVal);
+		$('.mapimg').attr('src', imgMap);
+	});
+	
+	$('.interfaceButton').click(function() {
+		$('.exNetScreen').addClass('dev');
+		$('.mainScreen').removeClass('dev');
+	})
+	
+	// New keydown event listener for 'Esc' key
+	$(document).keydown(function(e) {
+		// Check if the pressed key is 'Esc' (key code 27) and if exNetScreen is visible
+		if (e.keyCode === 27 && !$('.exNetScreen').hasClass('dev')) {
+			$('.exNetScreen').addClass('dev');
+			$('.mainScreen').removeClass('dev');
+		}
+	});
+	
+	$('.playlistbtn').click(function() {
+		$('.exNetScreen').removeClass('dev');
+		$('.mainScreen').addClass('dev');
+	})
+	
+	$('.mus').animate({'volume': 0.2})
+	
+	$('.switchmus').click(function() {
+		if(playing) {
+			$('.mus').trigger('pause');
+			$(".mus").prop("currentTime",0);
+			playing = false;
+		}
+		else {
+			$('.mus').trigger('play');
+			playing = true;
+		}
+	})
+	
+	const tdm = 'connect 23.26.130.20:27016';
+	const rustinal = 'connect 23.26.130.20:27017';
+	
+	function copyRustinal() {
+		navigator.clipboard.writeText(rustinal)
+			.then(() => {
+				alert('Connect command + Rustinal IP copied to clipboard');
+			})
+			.catch(err => {
+				console.error('Failed to copy: ', err);
+				alert('Failed to copy to clipboard. Please try again.');
+			});
 	}
-	else {
-		$('.mus').trigger('play');
-		playing = true;
+	
+	function copyTDM() {
+		navigator.clipboard.writeText(tdm)
+			.then(() => {
+				alert('Connect command + TDM/DOM IP copied to clipboard');
+			})
+			.catch(err => {
+				console.error('Failed to copy: ', err);
+				alert('Failed to copy to clipboard. Please try again.');
+			});
 	}
-})
-
-// Create an array to store our particles
-var particles = [];
-
-// The amount of particles to render
-var particleCount = 250;
-
-// The maximum velocity in each direction
-var maxVelocity = 1;
-
-// The target frames per second (how often do we want to update / redraw the scene)
-var targetFPS = 20;
-
-// Set the dimensions of the canvas as variables so they can be used.
-var canvasWidth = 1280;
-var canvasHeight = 720;
-
-// Create an image object (only need one instance)
-var imageObj = new Image();
-
-// Once the image has been downloaded then set the image on all of the particles
-imageObj.onload = function() {
-    particles.forEach(function(particle) {
-            particle.setImage(imageObj);
-    });
-};
-
-// Once the callback is arranged then set the source of the image
-imageObj.src = "Smoke10.png";
-
-// A function to create a particle object.
-function Particle(context) {
-
-    // Set the initial x and y positions
-    this.x = 0;
-    this.y = 0;
-
-    // Set the initial velocity
-    this.xVelocity = 0;
-    this.yVelocity = 0;
-
-    // Set the radius
-    this.radius = 7;
-
-    // Store the context which will be used to draw the particle
-    this.context = context;
-
-    // The function to draw the particle on the canvas.
-    this.draw = function() {
-        
-        // If an image is set draw it
-        if(this.image){
-            this.context.drawImage(this.image, this.x-128, this.y-128);         
-            // If the image is being rendered do not draw the circle so break out of the draw function                
-            return;
-        }
-        // Draw the circle as before, with the addition of using the position and the radius from this object.
-        this.context.beginPath();
-        this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        this.context.fillStyle = "rgba(0, 0, 0, 1)";
-        this.context.fill();
-        this.context.closePath();
-    };
-
-    // Update the particle.
-    this.update = function() {
-        // Update the position of the particle with the addition of the velocity.
-        this.x += this.xVelocity;
-        this.y += this.yVelocity;
-
-        // Check if has crossed the right edge
-        if (this.x >= canvasWidth) {
-            this.xVelocity = -this.xVelocity;
-            this.x = canvasWidth;
-        }
-        // Check if has crossed the left edge
-        else if (this.x <= 0) {
-            this.xVelocity = -this.xVelocity;
-            this.x = 0;
-        }
-
-        // Check if has crossed the bottom edge
-        if (this.y >= canvasHeight) {
-            this.yVelocity = -this.yVelocity;
-            this.y = canvasHeight;
-        }
-        
-        // Check if has crossed the top edge
-        else if (this.y <= 0) {
-            this.yVelocity = -this.yVelocity;
-            this.y = 0;
-        }
-    };
-
-    // A function to set the position of the particle.
-    this.setPosition = function(x, y) {
-        this.x = x;
-        this.y = y;
-    };
-
-    // Function to set the velocity.
-    this.setVelocity = function(x, y) {
-        this.xVelocity = x;
-        this.yVelocity = y;
-    };
-    
-    this.setImage = function(image){
-        this.image = image;
-    }
-}
-
-// A function to generate a random number between 2 values
-function generateRandom(min, max){
-    return Math.random() * (max - min) + min;
-}
-
-// The canvas context if it is defined.
-var context;
-
-// Initialise the scene and set the context if possible
-function init() {
-    var canvas = document.getElementById('myCanvas');
-    if (canvas.getContext) {
-
-        // Set the context variable so it can be re-used
-        context = canvas.getContext('2d');
-
-        // Create the particles and set their initial positions and velocities
-        for(var i=0; i < particleCount; ++i){
-            var particle = new Particle(context);
-            
-            // Set the position to be inside the canvas bounds
-            particle.setPosition(generateRandom(0, canvasWidth), generateRandom(0, canvasHeight));
-            
-            // Set the initial velocity to be either random and either negative or positive
-            particle.setVelocity(generateRandom(-maxVelocity, maxVelocity), generateRandom(-maxVelocity, maxVelocity));
-            particles.push(particle);            
-        }
-    }
-    else {
-        alert("Please use a modern browser");
-    }
-}
-
-// The function to draw the scene
-function draw() {
-    // Clear the drawing surface and fill it with a black background
-    context.fillStyle = "rgba(70, 70, 70, 0.1)";
-    context.fillRect(0, 0, 1280, 720);
-
-    // Go through all of the particles and draw them.
-    particles.forEach(function(particle) {
-        particle.draw();
-    });
-}
-
-// Update the scene
-function update() {
-    particles.forEach(function(particle) {
-        particle.update();
-    });
-}
-
-// Initialize the scene
-init();
-
-// If the context is set then we can draw the scene (if not then the browser does not support canvas)
-if (context) {
-    setInterval(function() {
-        // Update the scene befoe drawing
-        update();
-
-        // Draw the scene
-        draw();
-    }, 1000 / targetFPS);
-}
-
-
-
+	
 </script>
 </body>
 </html>
