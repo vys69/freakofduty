@@ -241,7 +241,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 		line-height: 16px;
 	}
 	.smaller {
-		font-size: 21px;
+		font-size: 15px;
 		letter-spacing: 0px;
 		padding-left: 3px;
 		color: #ccc;
@@ -412,6 +412,39 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 	audio.mus {
 		opacity: 0.05;
 	}
+	.rainbow-text {
+		display: inline-block;
+	}
+
+	.rainbow-text span {
+		display: inline-block;
+		animation: rainbow 5s linear infinite;
+	}
+
+	.rainbow-text span:nth-child(10n + 1) { animation-delay: -0.5s; }
+	.rainbow-text span:nth-child(10n + 2) { animation-delay: -1.0s; }
+	.rainbow-text span:nth-child(10n + 3) { animation-delay: -1.5s; }
+	.rainbow-text span:nth-child(10n + 4) { animation-delay: -2.0s; }
+	.rainbow-text span:nth-child(10n + 5) { animation-delay: -2.5s; }
+	.rainbow-text span:nth-child(10n + 6) { animation-delay: -3.0s; }
+	.rainbow-text span:nth-child(10n + 7) { animation-delay: -3.5s; }
+	.rainbow-text span:nth-child(10n + 8) { animation-delay: -4.0s; }
+	.rainbow-text span:nth-child(10n + 9) { animation-delay: -4.5s; }
+	.rainbow-text span:nth-child(10n + 10) { animation-delay: -5.0s; }
+
+	@keyframes rainbow {
+		0% { color: #ff0000; }
+		10% { color: #ff7f00; }
+		20% { color: #ffff00; }
+		30% { color: #00ff00; }
+		40% { color: #0000ff; }
+		50% { color: #4b0082; }
+		60% { color: #9400d3; }
+		70% { color: #ff1493; }
+		80% { color: #ff00ff; }
+		90% { color: #ff4500; }
+		100% { color: #ff0000; }
+	}
 	</style>
 </head>
 <body>
@@ -497,7 +530,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 			Keep arguments and disputes to a minimum, or take it to DMs
 		</marquee>
 	</div> -->
-	<div class="onscreenTitle">MODERN WARFARE 2<br><span class="smaller">Multiplayer Remastered</span></div>
+	<div class="onscreenTitle">FREAK OF DUTY<br>
+		<span class="smaller rainbow-text">
+			<span style="color: #ff0000;">L</span>
+			<span style="color: #ff7f00;">E</span>
+			<span style="color: #ffff00;">T</span>
+			<span style="color: #00ff00;">S</span>
+			<span style="color: #0000ff;"> </span>
+			<span style="color: #4b0082;">G</span>
+			<span style="color: #9400d3;">E</span>
+			<span style="color: #ff1493;">T</span>
+			<span style="color: #00ffff;"> </span>
+			<span style="color: #ff00ff;">F</span>
+			<span style="color: #ff4500;">R</span>
+			<span style="color: #32cd32;">E</span>
+			<span style="color: #fa8072;">A</span>
+			<span style="color: #40e0d0;">K</span>
+			<span style="color: #ba55d3;">Y</span>
+			<span style="color: #ffd700;">.</span>
+			<span style="color: #00fa9a;"> </span>
+			👅👅👅👅👅
+		</span>
+	</div>
 </div>
 
 <div class="screenDefault exNetScreen dev">
@@ -566,7 +620,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 
 <script type="text/javascript">
 	var playing = true;
-	
+
 	$('.button').mouseover(function() {
 		textVal = $(this).attr('screenVal');
 		$(this).parent().find('.textnotbtn').text(textVal);
