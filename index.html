@@ -568,7 +568,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 		<div class="seperator"></div>
 		<div class="textnotbtn">West Coast</div>
 		<div class="buttons">
-			<div class="button" onclick="(copyLA1())" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination! Get freaky on Rust, Highrise, Boneyard, Terminal, Complex, Crash, Favela, Afghan and Shipment" img="https://static.wikia.nocookie.net/callofduty/images/2/29/Favela_Map_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174410">
+			<div class="button" onclick="copyServerIP('la1')" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination! Get freaky on Rust, Highrise, Boneyard, Terminal, Complex, Crash, Favela, Afghan and Shipment" img="https://static.wikia.nocookie.net/callofduty/images/2/29/Favela_Map_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174410">
 				<div class="buttonText"><span style="color: #12759d;">[NA-W]</span> 24/7 Domination</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
@@ -576,7 +576,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 				<div class="blackside4 blackside"></div>	
 				<div class="unlocked"></div>
 			</div>
-			<div class="button" onclick="(copyLA2())" mscreenVal="24/7 freakathon on the most MW2 popular maps! 👅👅👅 TDM & DOM" img="https://static.wikia.nocookie.net/callofduty/images/2/29/Favela_Map_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174410">
+			<div class="button" onclick="copyServerIP('la2')" mscreenVal="24/7 freakathon on the most MW2 popular maps! 👅👅👅 TDM & DOM" img="https://static.wikia.nocookie.net/callofduty/images/2/29/Favela_Map_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174410">
 				<div class="buttonText"><span style="color: #12759d;">[LA-2]</span>Extended Domination</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
@@ -585,7 +585,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 				<div class="unlocked"></div>
 			</div>
 			<div class="textnotbtn">East Coast</div>
-			<div class="button" onclick="(copyNYC())" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination on Terminal only!" img="https://static.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174519">
+			<div class="button" onclick="copyServerIP('nyc')" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination on Terminal only!" img="https://static.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174519">
 				<div class="buttonText"><span style="color: #12759d;">[NYC]</span>24/7 Terminal</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
@@ -681,41 +681,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 		}
 	})
 	
-	const la1 = 'connect 23.26.130.20:27016';
-	const la2 = 'connect 23.26.130.20:27017';
-	const nyc = 'connect 2.56.254.24:27018';
-	
-	function copyLA2() {
-		navigator.clipboard.writeText(la2)
-			.then(() => {
-				alert('Connect command + TDM/DOM IP copied to clipboard');
-			})
-			.catch(err => {
-				console.error('Failed to copy: ', err);
-				alert('Failed to copy to clipboard. Please try again.');
-			});
-	}
-	
-	function copyNYC() {
-		navigator.clipboard.writeText(nyc)
-			.then(() => {
-				alert('Connect command + TDM/DOM IP copied to clipboard');
-			})
-			.catch(err => {
-				console.error('Failed to copy: ', err);
-				alert('Failed to copy to clipboard. Please try again.');
-			});
-	}
-	
-	function copyLA1() {
-		navigator.clipboard.writeText(la1)
-			.then(() => {
-				alert('Connect command + TDM/DOM IP copied to clipboard');
-			})
-			.catch(err => {
-				console.error('Failed to copy: ', err);
-				alert('Failed to copy to clipboard. Please try again.');
-			});
+	const servers = {
+		la1: '23.26.130.20:27016',
+		la2: '23.26.130.20:27017',
+		nyc: '2.56.254.24:27018'
+	};
+
+	function copyServerIP(server) {
+	const connectCommand = `connect ${servers[server]}`;
+	navigator.clipboard.writeText(connectCommand)
+		.then(() => {
+		alert('Connect command copied to clipboard');
+		})
+		.catch(err => {
+		console.error('Failed to copy: ', err);
+		alert('Failed to copy to clipboard. Please try again.');
+		});
 	}
 	
 </script>
