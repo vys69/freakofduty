@@ -686,29 +686,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 	const nyc = 'connect 2.56.254.24:27018';
 	
 	function copyLA2() {
-		// navigator.clipboard.writeText(rustinal)
-		// 	.then(() => {
-		// 		alert('Connect command + Rustinal IP copied to clipboard');
-		// 	})
-		// 	.catch(err => {
-		// 		console.error('Failed to copy: ', err);
-		// 		alert('Failed to copy to clipboard. Please try again.');
-		// 	});
+		navigator.clipboard.writeText(la2)
+			.then(() => {
+				alert('Connect command + TDM/DOM IP copied to clipboard');
+			})
+			.catch(err => {
+				console.error('Failed to copy: ', err);
+				alert('Failed to copy to clipboard. Please try again.');
+			});
 	}
 	
 	function copyNYC() {
-		// navigator.clipboard.writeText(eastCoast)
-		// 	.then(() => {
-		// 		alert('Connect command + East Coast IP copied to clipboard');
-		// 	})
-		// 	.catch(err => {
-		// 		console.error('Failed to copy: ', err);
-		// 		alert('Failed to copy to clipboard. Please try again.');
-		// 	});
+		navigator.clipboard.writeText(nyc)
+			.then(() => {
+				alert('Connect command + TDM/DOM IP copied to clipboard');
+			})
+			.catch(err => {
+				console.error('Failed to copy: ', err);
+				alert('Failed to copy to clipboard. Please try again.');
+			});
 	}
 	
 	function copyLA1() {
-		navigator.clipboard.writeText(tdm)
+		navigator.clipboard.writeText(la1)
 			.then(() => {
 				alert('Connect command + TDM/DOM IP copied to clipboard');
 			})
