@@ -577,7 +577,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 				<div class="unlocked"></div>
 			</div>
 			<div class="button" onclick="copyServerIP('la2')" mscreenVal="24/7 freakathon on the most MW2 popular maps! 👅👅👅 TDM & DOM" img="https://static.wikia.nocookie.net/callofduty/images/2/29/Favela_Map_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174410">
-				<div class="buttonText"><span style="color: #12759d;">[LA-2]</span>Extended Domination</div>	
+				<div class="buttonText"><span style="color: #12759d;">[LA-2]</span> Extended Domination</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
 				<div class="blackside3 blackside"></div>	
@@ -586,7 +586,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 			</div>
 			<div class="textnotbtn">East Coast</div>
 			<div class="button" onclick="copyServerIP('nyc')" mscreenVal="LETS GET FREAKY. 👅👅👅👅👅 24/7 Domination on Terminal only!" img="https://static.wikia.nocookie.net/callofduty/images/1/14/Bare_Load_Screen_Terminal_MW2.jpg/revision/latest/scale-to-width-down/1000?cb=20100720174519">
-				<div class="buttonText"><span style="color: #12759d;">[NYC]</span>24/7 Terminal</div>	
+				<div class="buttonText"><span style="color: #12759d;">[NYC]</span> 24/7 Terminal</div>	
 				<div class="blackside1 blackside"></div>
 				<div class="blackside2 blackside"></div>	
 				<div class="blackside3 blackside"></div>	
@@ -688,15 +688,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 	};
 
 	function copyServerIP(server) {
-	const connectCommand = `connect ${servers[server]}`;
-	navigator.clipboard.writeText(connectCommand)
-		.then(() => {
-		alert('Connect command copied to clipboard');
-		})
-		.catch(err => {
-		console.error('Failed to copy: ', err);
-		alert('Failed to copy to clipboard. Please try again.');
-		});
+		const connectCommand = `connect ${servers[server]}`;
+		
+		// Create a temporary textarea element
+		const tempTextArea = document.createElement('textarea');
+		tempTextArea.value = connectCommand;
+		
+		// Append it to the body
+		document.body.appendChild(tempTextArea);
+		
+		// Select the text
+		tempTextArea.select();
+		tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+		
+		// Copy the text
+		try {
+			document.execCommand('copy');
+			alert('Connect command copied to clipboard');
+		} catch (err) {
+			console.error('Failed to copy: ', err);
+			alert('Failed to copy to clipboard. Please try again.');
+		}
+		
+		// Remove the temporary element
+		document.body.removeChild(tempTextArea);
 	}
 	
 </script>
